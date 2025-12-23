@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { emails } = body;
+    const { emails, emailContent } = body;
 
     if (!emails) {
       return Response.json(
@@ -36,12 +36,8 @@ export async function POST(req) {
       },
     });
 
-    const mailOptions = {
-      from: `"Application Team" <${process.env.SMTP_EMAIL}>`,
-      to: emailList, // array or single email both work
-      subject: "Application Submission",
-      // Hardcoded email content
-     html: `
+    // Use custom email content if provided, otherwise use default
+    const defaultEmailContent = `
   <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
     
     <p>Dear Hiring Team,</p>
@@ -105,8 +101,13 @@ export async function POST(req) {
     </p>
 
   </div>
-`,
+`;
 
+    const mailOptions = {
+      from: `"Application Team" <${process.env.SMTP_EMAIL}>`,
+      to: emailList, // array or single email both work
+      subject: "Application Submission",
+      html: emailContent || defaultEmailContent,
     };
 
     await transporter.sendMail(mailOptions);
