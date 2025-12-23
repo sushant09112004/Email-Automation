@@ -106,7 +106,7 @@ export async function POST(req) {
     const mailOptions = {
       from: `"Application Team" <${process.env.SMTP_EMAIL}>`,
       to: emailList, // array or single email both work
-      subject: "Application Submission",
+      subject: "Sushant Jadhav - Application ",
       html: emailContent || defaultEmailContent,
     };
 
