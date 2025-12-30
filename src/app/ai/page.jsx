@@ -85,12 +85,12 @@ export default function AIPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-4 md:p-8">
+    <div className="min-h-screen bg-white text-black p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
           AI-Powered Application Email Generator
         </h1>
-        <p className="text-gray-400 text-center mb-8 text-sm md:text-base">
+        <p className="text-gray-600 text-center mb-8 text-sm md:text-base">
           Enter job description to generate personalized application email
         </p>
 
@@ -98,7 +98,7 @@ export default function AIPage() {
           {/* Left Column - Input */}
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300">
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Job Description
               </label>
               <textarea
@@ -106,15 +106,15 @@ export default function AIPage() {
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
                 rows={12}
-                className="w-full p-4 bg-black border border-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white resize-none text-white placeholder-gray-500"
+                className="w-full p-4 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-black placeholder-gray-400"
               />
               <button
                 onClick={handleGenerate}
                 disabled={generating || !jobDescription.trim()}
-                className={`w-full mt-4 py-3 rounded-lg font-medium transition-all duration-200 border-2 ${
+                className={`w-full mt-4 py-3 rounded-lg font-medium transition-all duration-200 border ${
                   generating || !jobDescription.trim()
-                    ? "bg-gray-900 border-gray-700 text-gray-500 cursor-not-allowed"
-                    : "bg-white text-black border-white hover:bg-gray-100"
+                    ? "bg-gray-200 border-gray-300 text-gray-400 cursor-not-allowed"
+                    : "bg-blue-600 border-blue-600 text-white hover:bg-blue-700"
                 }`}
               >
                 {generating ? "Generating..." : "Generate Email with AI"}
@@ -122,7 +122,7 @@ export default function AIPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300">
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Recipient Email Address
               </label>
               <input
@@ -130,7 +130,7 @@ export default function AIPage() {
                 placeholder="recipient@example.com"
                 value={recipientEmail}
                 onChange={(e) => setRecipientEmail(e.target.value)}
-                className="w-full p-4 bg-black border border-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white text-white placeholder-gray-500"
+                className="w-full p-4 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black placeholder-gray-400"
               />
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function AIPage() {
           {/* Right Column - Generated Email */}
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-300">
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Generated Email Content (Editable)
               </label>
               <textarea
@@ -146,17 +146,17 @@ export default function AIPage() {
                 value={emailContent}
                 onChange={(e) => setEmailContent(e.target.value)}
                 rows={16}
-                className="w-full p-4 bg-black border border-white rounded-lg focus:outline-none focus:ring-2 focus:ring-white resize-none text-white placeholder-gray-500 font-mono text-sm"
+                className="w-full p-4 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-black placeholder-gray-400 font-mono text-sm"
               />
             </div>
 
             <button
               onClick={handleSend}
               disabled={sending || !emailContent.trim() || !recipientEmail.trim()}
-              className={`w-full py-3 rounded-lg font-medium transition-all duration-200 border-2 ${
+              className={`w-full py-3 rounded-lg font-medium transition-all duration-200 border ${
                 sending || !emailContent.trim() || !recipientEmail.trim()
-                  ? "bg-gray-900 border-gray-700 text-gray-500 cursor-not-allowed"
-                  : "bg-white text-black border-white hover:bg-gray-100"
+                  ? "bg-gray-200 border-gray-300 text-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 border-blue-600 text-white hover:bg-blue-700"
               }`}
             >
               {sending ? "Sending..." : "Send Email"}
@@ -168,8 +168,8 @@ export default function AIPage() {
           <div
             className={`mt-6 p-4 rounded-lg border ${
               message.includes("success")
-                ? "bg-gray-900 border-white text-white"
-                : "bg-gray-900 border-gray-600 text-gray-300"
+                ? "bg-blue-50 border-blue-500 text-blue-900"
+                : "bg-red-50 border-red-400 text-red-700"
             }`}
           >
             <p className="text-center">{message}</p>

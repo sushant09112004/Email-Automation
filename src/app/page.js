@@ -2,8 +2,10 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-   <div>
-    <h1>Welcome to My personized email automation application </h1>
-   </div>
+    <div className="min-h-screen flex items-center justify-center bg-white text-black px-4">
+      <h1 className="text-2xl md:text-4xl font-bold text-center">
+        Welcome to My personalized email automation application
+      </h1>
+    </div>
   );
 }
