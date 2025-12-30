@@ -1,8 +1,6 @@
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { personalContext } from "@/lib/personal-context";
-import { connectDB } from "@/lib/mongodb";
-import Email from "../../../../models/email";
 
 export async function POST(req) {
   // Try different model names in order of preference
@@ -14,29 +12,13 @@ export async function POST(req) {
 
   try {
     const body = await req.json();
-    const { jobDescription, email } = body;
+    const { jobDescription } = body;
 
     if (!jobDescription || jobDescription.trim() === "") {
       return Response.json(
         { success: false, message: "Job description is required" },
         { status: 400 }
       );
-    }
-
-    // Optionally store the email in the database (if provided)
-    if (email && email.trim() !== "") {
-      try {
-        await connectDB();
-        // Use upsert-like behavior to avoid duplicate key errors on unique email
-        await Email.updateOne(
-          { email },
-          { $setOnInsert: { email } },
-          { upsert: true }
-        );
-      } catch (dbError) {
-        // Log DB errors but don't block AI generation
-        console.error("Failed to store email in database:", dbError);
-      }
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
